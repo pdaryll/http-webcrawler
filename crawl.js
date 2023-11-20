@@ -1,3 +1,26 @@
+const {JSDOM} = require('jsdom')
+
+function getURLsFromHTML(htmlBody, baseURL) {
+    const urls = []
+    const dom = new JSDOM(htmlBody)
+    const linkElements = dom.window.document.querySelectorAll('a')
+    for (const linkElement of linkElements) {
+        let newURL = linkElement.href
+
+        if (newURL.slice(0, 1) === '/') {
+            newURL = baseURL + newURL
+        }
+
+        try {
+            const urlObj = new URL(newURL)
+            urls.push(newURL)
+        } catch (err) {
+            console.log("error with url: "+ `${err.message}`)
+        }
+    }
+    return urls
+}
+
 function normalizeURL(urlString) {
     const urlObj = new URL(urlString)
     const hostPath = `${urlObj.hostname}${urlObj.pathname}`
@@ -8,5 +31,6 @@ function normalizeURL(urlString) {
 }
 
 module.exports = {
-    normalizeURL
+    normalizeURL,
+    getURLsFromHTML
 }
