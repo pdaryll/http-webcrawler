@@ -1,0 +1,16 @@
+{
+  "name": "http-webcrawler",
+  "version": "1.0.0",
+  "description": "Crawls a website and produces a report of its internal linking structure",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
